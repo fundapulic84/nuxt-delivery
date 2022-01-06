@@ -1,26 +1,20 @@
 <template>
   <section>
     <h1>News</h1>
-    <div class="articles">
-      <Article
-        v-for="article in articles"
-        :key="article.id"
-        :thumbnail="article.thumbnail"
-        :title="article.title"
-        :id="article.id"
-        :text="article.text"
-      />
+    <div class="articles" v-if="articles">
+      <ul>
+        <li v-for="article in articles" :key="article.id">
+          <nuxt-link :to="'/articles/' + article.id">{{
+            article.title
+          }}</nuxt-link>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
 
 <script>
-import Article from '/components/Article.vue'
-
 export default {
-  components: {
-    Article,
-  },
   asyncData() {
     //pre-render on server and fetch data ahead of rendering
     //simulate a fetch request from server
